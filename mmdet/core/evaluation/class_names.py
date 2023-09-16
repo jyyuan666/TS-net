@@ -15,7 +15,7 @@ def wider_face_classes():
 
 def voc_classes():
     return [
-        'fire',
+        'fire', 'yanwu'
     ]
 
 

@@ -48,7 +48,7 @@ class BasicBlock(BaseModule):
             conv_cfg, planes, planes, 3, padding=1, bias=False)
         self.add_module(self.norm2_name, norm2)
 
-        self.Hardshrink = nn.Hardshrink()
+        self.relu = nn.ReLU(inplace=True)
         self.downsample = downsample
         self.stride = stride
         self.dilation = dilation
@@ -72,7 +72,7 @@ class BasicBlock(BaseModule):
 
             out = self.conv1(x)
             out = self.norm1(out)
-            out = self.Hardshrink(out)
+            out = self.relu(out)
 
             out = self.conv2(out)
             out = self.norm2(out)
@@ -89,7 +89,7 @@ class BasicBlock(BaseModule):
         else:
             out = _inner_forward(x)
 
-        out = self.Hardshrink(out)
+        out = self.relu(out)
 
         return out
 
@@ -205,7 +205,7 @@ class Bottleneck(BaseModule):
             bias=False)
         self.add_module(self.norm3_name, norm3)
 
-        self.Hardshrink = nn.Hardshrink()
+        self.relu = nn.ReLU(inplace=True)
         self.downsample = downsample
 
         if self.with_plugins:
@@ -267,14 +267,14 @@ class Bottleneck(BaseModule):
             identity = x
             out = self.conv1(x)
             out = self.norm1(out)
-            out = self.Hardshrink(out)
+            out = self.relu(out)
 
             if self.with_plugins:
                 out = self.forward_plugin(out, self.after_conv1_plugin_names)
 
             out = self.conv2(out)
             out = self.norm2(out)
-            out = self.Hardshrink(out)
+            out = self.relu(out)
 
             if self.with_plugins:
                 out = self.forward_plugin(out, self.after_conv2_plugin_names)
@@ -297,7 +297,7 @@ class Bottleneck(BaseModule):
         else:
             out = _inner_forward(x)
 
-        out = self.Hardshrink(out)
+        out = self.relu(out)
 
         return out
 
@@ -574,7 +574,7 @@ class ResNet(BaseModule):
                     padding=1,
                     bias=False),
                 build_norm_layer(self.norm_cfg, stem_channels // 2)[1],
-                nn.Hardshrink(),
+                nn.ReLU(inplace=True),
                 build_conv_layer(
                     self.conv_cfg,
                     stem_channels // 2,
@@ -584,7 +584,7 @@ class ResNet(BaseModule):
                     padding=1,
                     bias=False),
                 build_norm_layer(self.norm_cfg, stem_channels // 2)[1],
-                nn.Hardshrink(),
+                nn.ReLU(inplace=True),
                 build_conv_layer(
                     self.conv_cfg,
                     stem_channels // 2,
@@ -594,7 +594,7 @@ class ResNet(BaseModule):
                     padding=1,
                     bias=False),
                 build_norm_layer(self.norm_cfg, stem_channels)[1],
-                nn.Hardshrink())
+                nn.ReLU(inplace=True))
         else:
             self.conv1 = build_conv_layer(
                 self.conv_cfg,
@@ -607,7 +607,7 @@ class ResNet(BaseModule):
             self.norm1_name, norm1 = build_norm_layer(
                 self.norm_cfg, stem_channels, postfix=1)
             self.add_module(self.norm1_name, norm1)
-            self.Hardshrink = nn.Hardshrink()
+            self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
 
     def _freeze_stages(self):
@@ -635,7 +635,7 @@ class ResNet(BaseModule):
         else:
             x = self.conv1(x)
             x = self.norm1(x)
-            x = self.Hardshrink(x)
+            x = self.relu(x)
         x = self.maxpool(x)
         outs = []
         for i, layer_name in enumerate(self.res_layers):

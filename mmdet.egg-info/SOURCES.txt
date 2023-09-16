@@ -124,6 +124,7 @@ mmdet/.mim/configs/dcnv2/metafile.yml
 mmdet/.mim/configs/ddod/ddod_r50_fpn_1x_coco.py
 mmdet/.mim/configs/ddod/metafile.yml
 mmdet/.mim/configs/ddod_log_ddod_r50_fpn_1x_coco/ddod_r50_fpn_1x_coco.py
+mmdet/.mim/configs/ddod_log_ddod_r50_fpn_1x_coco/ddod_r50_fpn_1x_coco1.py
 mmdet/.mim/configs/deepfashion/mask_rcnn_r50_fpn_15e_deepfashion.py
 mmdet/.mim/configs/deformable_detr/deformable_detr_r50_16x2_50e_coco.py
 mmdet/.mim/configs/deformable_detr/deformable_detr_refine_r50_16x2_50e_coco.py
@@ -140,6 +141,7 @@ mmdet/.mim/configs/detectors/metafile.yml
 mmdet/.mim/configs/detr/detr_r50_8x2_150e_coco.py
 mmdet/.mim/configs/detr/metafile.yml
 mmdet/.mim/configs/detr_log_detr_r50_8x2_150e_coco/detr_r50_8x2_150e_coco.py
+mmdet/.mim/configs/detr_log_detr_r50_8x2_150e_coco1/detr_r50_8x2_150e_coco.py
 mmdet/.mim/configs/double_heads/dh_faster_rcnn_r50_fpn_1x_coco.py
 mmdet/.mim/configs/double_heads/metafile.yml
 mmdet/.mim/configs/dyhead/atss_r50_caffe_fpn_dyhead_1x_coco.py
@@ -200,6 +202,7 @@ mmdet/.mim/configs/faster_rcnn/faster_rcnn_x101_64x4d_fpn_2x_coco.py
 mmdet/.mim/configs/faster_rcnn/faster_rcnn_x101_64x4d_fpn_mstrain_3x_coco.py
 mmdet/.mim/configs/faster_rcnn/metafile.yml
 mmdet/.mim/configs/faster_rcnn_log_faster_rcnn_r50_fpn_1x_coco/faster_rcnn_r50_fpn_1x_coco.py
+mmdet/.mim/configs/faster_rcnn_log_faster_rcnn_r50_fpn_1x_coco/faster_rcnn_r50_fpn_1x_coco1.py
 mmdet/.mim/configs/fcos/fcos_center-normbbox-centeronreg-giou_r50_caffe_fpn_gn-head_1x_coco.py
 mmdet/.mim/configs/fcos/fcos_center-normbbox-centeronreg-giou_r50_caffe_fpn_gn-head_dcn_1x_coco.py
 mmdet/.mim/configs/fcos/fcos_center_r50_caffe_fpn_gn-head_1x_coco.py
@@ -369,9 +372,6 @@ mmdet/.mim/configs/instaboost/metafile.yml
 mmdet/.mim/configs/lad/lad_r101_paa_r50_fpn_coco_1x.py
 mmdet/.mim/configs/lad/lad_r50_paa_r101_fpn_coco_1x.py
 mmdet/.mim/configs/lad/metafile.yml
-mmdet/.mim/configs/lad1/lad_r101_paa_r50_fpn_coco_1x.py
-mmdet/.mim/configs/lad1/lad_r50_paa_r101_fpn_coco_1x.py
-mmdet/.mim/configs/lad1/metafile.yml
 mmdet/.mim/configs/lad2/lad_r101_paa_r50_fpn_coco_1x.py
 mmdet/.mim/configs/lad2/lad_r50_paa_r101_fpn_coco_1x.py
 mmdet/.mim/configs/lad2/metafile.yml
@@ -514,8 +514,8 @@ mmdet/.mim/configs/pvt/retinanet_pvtv2-b2_fpn_1x_coco.py
 mmdet/.mim/configs/pvt/retinanet_pvtv2-b3_fpn_1x_coco.py
 mmdet/.mim/configs/pvt/retinanet_pvtv2-b4_fpn_1x_coco.py
 mmdet/.mim/configs/pvt/retinanet_pvtv2-b5_fpn_1x_coco.py
-mmdet/.mim/configs/pvt_log_retinanet_pvt-s_fpn_1x_coco/retinanet_pvt-t_fpn_1x_coco.py
-mmdet/.mim/configs/pvt_log_retinanet_pvt-s_fpn_1x_coco_init_cfg/retinanet_pvt-t_fpn_1x_coco.py
+mmdet/.mim/configs/pvt_log_retinanet_pvt-s_fpn_1x_coco1/retinanet_pvt-t_fpn_1x_coco.py
+mmdet/.mim/configs/pvt_log_retinanet_pvt-t_fpn_1x_coco/retinanet_pvt-t_fpn_1x_coco.py
 mmdet/.mim/configs/queryinst/metafile.yml
 mmdet/.mim/configs/queryinst/queryinst_r101_fpn_300_proposals_crop_mstrain_480-800_3x_coco.py
 mmdet/.mim/configs/queryinst/queryinst_r101_fpn_mstrain_480-800_3x_coco.py
@@ -763,13 +763,11 @@ mmdet/.mim/tools/analysis_tools/benchmark.py
 mmdet/.mim/tools/analysis_tools/benchmark_new.py
 mmdet/.mim/tools/analysis_tools/coco_error_analysis.py
 mmdet/.mim/tools/analysis_tools/confusion_matrix.py
-mmdet/.mim/tools/analysis_tools/confusion_matrix_Matplotlib.py
 mmdet/.mim/tools/analysis_tools/eval_metric.py
 mmdet/.mim/tools/analysis_tools/get_flops.py
 mmdet/.mim/tools/analysis_tools/optimize_anchors.py
 mmdet/.mim/tools/analysis_tools/robustness_eval.py
 mmdet/.mim/tools/analysis_tools/test_robustness.py
-mmdet/.mim/tools/analysis_tools/testpicture.py
 mmdet/.mim/tools/dataset_converters/cityscapes.py
 mmdet/.mim/tools/dataset_converters/images2coco.py
 mmdet/.mim/tools/dataset_converters/pascal_voc.py
@@ -922,7 +920,6 @@ mmdet/datasets/samplers/infinite_sampler.py
 mmdet/models/__init__.py
 mmdet/models/builder.py
 mmdet/models/backbones/__init__.py
-mmdet/models/backbones/backbone_new.py
 mmdet/models/backbones/csp_darknet.py
 mmdet/models/backbones/darknet.py
 mmdet/models/backbones/detectors_resnet.py

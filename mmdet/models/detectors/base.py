@@ -14,6 +14,8 @@ from mmdet.core.visualization import imshow_det_bboxes
 class BaseDetector(BaseModule, metaclass=ABCMeta):
     """Base class for detectors."""
 
+    print(00000000000000)
+
     def __init__(self, init_cfg=None):
         super(BaseDetector, self).__init__(init_cfg)
         self.fp16_enabled = False
@@ -312,6 +314,9 @@ class BaseDetector(BaseModule, metaclass=ABCMeta):
         img = mmcv.imread(img)
         img = img.copy()
         if isinstance(result, tuple):
+
+            print("result:", result)
+
             bbox_result, segm_result = result
             if isinstance(segm_result, tuple):
                 segm_result = segm_result[0]  # ms rcnn

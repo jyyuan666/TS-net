@@ -138,6 +138,15 @@ def draw_labels(ax,
         matplotlib.Axes: The result axes.
     """
     for i, (pos, label) in enumerate(zip(positions, labels)):
+
+
+
+        if class_names == ('fire', 'yanwu'):
+
+            class_names = ('fire', 'smoke')
+
+            # print("class_names:", class_names)
+
         label_text = class_names[
             label] if class_names is not None else f'class {label}'
         if scores is not None:

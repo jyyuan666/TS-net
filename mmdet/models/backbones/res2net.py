@@ -111,16 +111,14 @@ class Bottle2neck(_Bottleneck):
 
             out = self.conv1(x)
             out = self.norm1(out)
-            # out = self.relu6(out)
-            out = self.Hardshrink(out)
+            out = self.relu(out)
 
             if self.with_plugins:
                 out = self.forward_plugin(out, self.after_conv1_plugin_names)
 
             spx = torch.split(out, self.width, 1)
             sp = self.convs[0](spx[0].contiguous())
-            # sp = self.relu6(self.bns[0](sp))
-            sp = self.Hardshrink(self.bns[0](sp))
+            sp = self.relu(self.bns[0](sp))
             out = sp
             for i in range(1, self.scales - 1):
                 if self.stage_type == 'stage':
@@ -128,8 +126,7 @@ class Bottle2neck(_Bottleneck):
                 else:
                     sp = sp + spx[i]
                 sp = self.convs[i](sp.contiguous())
-                # sp = self.relu6(self.bns[i](sp))
-                sp = self.Hardshrink(self.bns[i](sp))
+                sp = self.relu(self.bns[i](sp))
                 out = torch.cat((out, sp), 1)
 
             if self.stage_type == 'normal' or self.conv2_stride == 1:
@@ -158,8 +155,7 @@ class Bottle2neck(_Bottleneck):
         else:
             out = _inner_forward(x)
 
-        # out = self.relu6(out)
-        out = self.Hardshrink(out)
+        out = self.relu(out)
 
         return out
 
@@ -300,7 +296,6 @@ class Res2Net(ResNet):
 
     arch_settings = {
         50: (Bottle2neck, (3, 4, 6, 3)),
-        # 50: (Bottle2neck, (1, 1, 1, 1)),
         101: (Bottle2neck, (3, 4, 23, 3)),
         152: (Bottle2neck, (3, 8, 36, 3))
     }

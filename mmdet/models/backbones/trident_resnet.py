@@ -255,9 +255,6 @@ class TridentResNet(ResNet):
 
     def __init__(self, depth, num_branch, test_branch_idx, trident_dilations,
                  **kwargs):
-    # def __init__(self, depth,
-    #              **kwargs):
-
 
         assert num_branch == len(trident_dilations)
         assert depth in (50, 101, 152)
