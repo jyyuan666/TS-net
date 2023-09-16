@@ -1,0 +1,55 @@
+    def _save_xml_pic(self,out_data, feature_box, width, height, pic_name, depth):
+        """
+          生成xml描述文件
+
+          :param out_data: 输出文件夹路径
+          :type out_data: str
+          :param feature_box: nms后的bbox信息
+          :type feature_box: list
+          :param width: 图像宽度
+          :type width: Long
+          :param height: 图像高度
+          :type height: Long
+          :param pic_name: 对应标签文件的图片名称
+          :type pic_name: str
+          :param depth: 图像通道数
+          :type depth: str
+          """
+        from lxml.etree import Element, SubElement, tostring
+
+        node_root = Element('annotation')
+
+        node_folder = SubElement(node_root, 'folder')
+        node_folder.text = 'VOC'
+
+        node_filename = SubElement(node_root, 'filename')
+        node_filename.text = pic_name
+
+        node_size = SubElement(node_root, 'size')
+        node_width = SubElement(node_size, 'width')
+        node_width.text = '%s' % width
+
+        node_height = SubElement(node_size, 'height')
+        node_height.text = '%s' % height
+
+        node_depth = SubElement(node_size, 'depth')
+        node_depth.text = '%s' % depth
+
+        node_segmented = SubElement(node_root, 'segmented')
+        node_segmented.text = '%s' % 0
+
+        for list in feature_box:
+            node_object = SubElement(node_root, 'object')
+            node_name = SubElement(node_object, 'name')
+            node_name.text = str(list[4])
+            node_difficult = SubElement(node_object, 'difficult')
+            node_difficult.text = str(list[5])
+            node_truncated = SubElement(node_object, 'truncated')
+            node_truncated.text = str(0)
+            node_score = SubElement(node_object, 'score')
+            node_score.text = '%s' % list[6]
+            node_bndbox = SubElement(node_object, 'bndbox')
+            node_xmin = SubElement(node_bndbox, 'xmin')
+            node_xmin.text = '%s' % list[0]
+            node_ymin = SubElement(node_bndbox, 'ymin')
+            node_ymin.text = '%s'
